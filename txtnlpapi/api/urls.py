@@ -7,6 +7,7 @@ urlpatterns = [
     path('usercomments/<int:pk>/', views.UserCommentDetail.as_view(), name = 'usercomment-detail'),
     path('users/', views.UserList.as_view(), name = 'user-list'),
     path('users/<int:pk>/', views.UserDetail.as_view(), name = 'user-detail'),
+#    path('uploadcsv/<filename>', views.UserCommentCSVUpload.as_view()),
     path('', views.api_root),
 ]
 

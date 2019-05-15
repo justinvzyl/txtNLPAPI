@@ -6,6 +6,10 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from rest_framework.exceptions import ParseError
+from rest_framework.parsers import FileUploadParser
+from rest_framework.views import APIView
+from rest_framework import status
 
 @api_view(['GET'])
 def api_root(request, format = None):
@@ -26,6 +30,18 @@ class UserCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserCommentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                             IsOwnerOrReadOnly,)
+
+# class UserCommentCSVUpload(APIView):
+#     parser_classes = (FileUploadParser,)
+
+#     def put(self, request, filename, format = None):
+#         if 'file' not in request.data:
+#             raise ParseError('Empty content.')
+
+#         file_obj = request.data['file'].read()
+        
+#         print(type(file_obj))
+#         return Response(status=204)
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
