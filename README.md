@@ -7,24 +7,8 @@ A basic text API that allows authorized users to submit blocks of text on a topi
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
+
 See *'requirements.txt'*
-
-'''
-amqp==2.4.2
-billiard==3.6.0.0
-celery==4.3.0
-Django==2.2.1
-djangorestframework==3.9.4
-kombu==4.5.0
-nltk==3.4.1
-pytz==2019.1
-redis==3.2.1
-six==1.12.0
-sqlparse==0.3.0
-textblob==0.15.3
-vine==1.3.0
-'''
-
 
 ### Installing
 
