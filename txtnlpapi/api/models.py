@@ -7,7 +7,6 @@ class UserComment(models.Model):
     comment = models.TextField(required = True, blank  = False)
     polarity = models.FloatField(blank = True, default = 0)
     subjectivity = models.FloatField(blank = True, default = 0)
-    
     class Meta:
         ordering = ('created',)
 
