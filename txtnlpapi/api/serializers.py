@@ -7,6 +7,7 @@ class UserCommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserComment
         fields = ('url', 'created', 'topic', 'comment', 'polarity', 'subjectivity', 'owner')
+        read_only_fields = ('polarity', 'subjectivity', 'owner', 'created')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     usercomments = serializers.HyperlinkedRelatedField(many = True, view_name = 'usercomment-detail', read_only = True)
