@@ -20,7 +20,7 @@ class UserCommentList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     def perform_create(self, serializer):
         serializer.save(owner = self.request.user)
-
+    
 class UserCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserComment.objects.all()
     serializer_class = UserCommentSerializer
