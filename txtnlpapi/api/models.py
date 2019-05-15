@@ -1,4 +1,3 @@
-from .nlp_utils import SentimentAnalyzer
 from django.db import models
 
 

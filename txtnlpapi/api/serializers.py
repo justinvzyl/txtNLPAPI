@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import UserComment
 from django.contrib.auth.models import User
-from .nlp_utils import SentimentAnalyzer
+from .nlp_utils import get_sentiment
 
 class UserCommentSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source = 'owner.username')
@@ -11,12 +11,12 @@ class UserCommentSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ('polarity', 'subjectivity', 'owner', 'created')
     
     def create(self, validated_data):
-        sentiments = SentimentAnalyzer(validated_data['comment']).get_sentiment()
+        sentiments = get_sentiment(validated_data['comment'])
         validated_data.update(sentiments)
         return UserComment.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
-        sentiment = SentimentAnalyzer(validated_data.get('comment')).get_sentiment()
+        sentiment = get_sentiment(validated_data.get('comment'))
         instance.polarity = sentiment['polarity']
         instance.subjectivity = sentiment['subjectivity']
         instance.comment = validated_data.get('comment')
