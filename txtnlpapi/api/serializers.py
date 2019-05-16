@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserComment
+from .models import UserComment, BackLogComment
 from django.contrib.auth.models import User
 from .nlp_utils import get_sentiment
 
@@ -23,6 +23,16 @@ class UserCommentSerializer(serializers.HyperlinkedModelSerializer):
         instance.topic = validated_data.get('topic')
         instance.save()
         return instance
+
+class BackLogSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = BackLogComment
+        fields = ('url', 'created', 'topic', 'comment', 'polarity', 'subjectivity', 'owner')
+
+        def create(self, validated_data):
+            sentiments = get_sentiment(validated_data['comment'])
+            validated_data.update(sentiments)
+            return UserComment.objects.create(**validated_data)
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     usercomments = serializers.HyperlinkedRelatedField(many = True, view_name = 'usercomment-detail', read_only = True)

@@ -11,6 +11,16 @@ class UserComment(models.Model):
     subjectivity = models.DecimalField(blank = True, default = 0, max_digits = 6, decimal_places = 6)
     class Meta:
         ordering = ('created',)
+
+class BackLogComment(models.Model):
+    created = models.DateTimeField(auto_now_add = True)
+    owner = models.CharField(max_length = 254, blank = True, default = 'None')
+    topic = models.CharField(max_length = 254, blank = False, default = 'None')
+    comment = models.TextField(blank  = False)
+    polarity = models.DecimalField(blank = True, default = 0, max_digits = 6, decimal_places = 6)
+    subjectivity = models.DecimalField(blank = True, default = 0, max_digits = 6, decimal_places = 6)
+    class Meta:
+        ordering = ('created',)
     
 
 
