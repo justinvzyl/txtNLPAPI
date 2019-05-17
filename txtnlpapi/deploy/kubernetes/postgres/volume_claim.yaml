@@ -10,4 +10,4 @@ spec:
   resources:
     requests:
       storage: 2Gi
-  volumeName: postgres-pv
+  volumeName: postgres-pvc

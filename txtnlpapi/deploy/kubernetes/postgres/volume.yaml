@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: postgres-pv
+  name: postgres-pvc
   labels:
     type: local
 spec:
@@ -11,5 +11,5 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: /data/postgres-pv
+    path: /data/postgres-pvc
 

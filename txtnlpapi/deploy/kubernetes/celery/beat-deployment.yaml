@@ -1,25 +1,23 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: django
+  name: celery-beat
   labels:
-     app: django
+    app: celery-beat
 spec:
   replicas: 1
   selector:
     matchLabels:
-      pod: django
+      pod: celery-beat
   template:
     metadata:
       labels:
-        pod: django
+        pod: celery-beat
     spec:
       containers:
-        - name: django
+        - name: celery-beat
           image: justinvzyl/k8_txtnlpapi:1.0.5
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 8000
+          command: ['celery', '-A', 'txtnlpapi', 'beat', '-l', 'debug']
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -38,7 +36,3 @@ spec:
 
             - name: REDIS_HOST
               value: redis-service
-
-
-            
-

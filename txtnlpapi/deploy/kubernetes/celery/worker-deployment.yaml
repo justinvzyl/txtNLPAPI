@@ -1,14 +1,23 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1beta2
+kind: Deployment
 metadata:
-  name: django-migrations
+  name: celery-worker
+  labels:
+    deployment: celery-worker
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: celery-worker
   template:
+    metadata:
+      labels:
+        pod: celery-worker
     spec:
       containers:
-        - name: django
-          image: justinvzyl/k8_django_kubernetes:1.0.4
-          command: ['python', 'manage.py', 'migrate']
+        - name: celery-worker
+          image: justinvzyl/k8_txtnlpapi:1.0.5
+          command: ['celery', '-A', 'txtnlpapi', 'worker', '-l', 'info']
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -24,6 +33,6 @@ spec:
 
             - name: POSTGRES_HOST
               value: postgres-service
-      restartPolicy: Never
-  backoffLimit: 5
 
+            - name: REDIS_HOST
+              value: redis-service

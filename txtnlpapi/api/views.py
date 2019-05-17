@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.exceptions import ParseError
 from rest_framework.parsers import MultiPartParser
-from .parsers import PlainTextParser
 from rest_framework.views import APIView
 from rest_framework import status
 from .tasks import csv_to_usercomment
