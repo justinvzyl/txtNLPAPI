@@ -8,7 +8,7 @@ Django==2.2.1
 django-health-check==3.10.1
 djangorestframework==3.9.4
 flower==0.9.3
-httpie==1.0.2
+httpie==1.0.3
 idna==2.8
 kombu==4.5.0
 nltk==3.4.1
